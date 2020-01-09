@@ -1,0 +1,19 @@
+PUT http://localhost:8090/contact
+Content-Type: application/json
+
+{
+  "name": "saman",
+  "phoneNumber": "+909352490969",
+  "email": "saman.sarem@hotmail.com",
+  "organization": "snap",
+  "github": "https://github.com/cloudfoundry"
+}
+
+###
+GET http://localhost:8090/contact
+Content-Type: application/json
+
+{
+"name": "saman"
+}
+###
