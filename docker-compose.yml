@@ -17,6 +17,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: snapp
+      MYSQL_DATABASE: snapp
+      MYSQL_USER: root
+      MYSQL_PASSWORD: snapp
     network_mode: host
     ports:
       - 3306:3306

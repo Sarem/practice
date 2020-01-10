@@ -1,5 +1,3 @@
-server:
-  port: 8090
 spring:
   database: h2
   console: true
