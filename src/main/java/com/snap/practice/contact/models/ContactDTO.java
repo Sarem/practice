@@ -1,7 +1,5 @@
 package com.snap.practice.contact.models;
 
-
-
 import java.util.Objects;
 
 public class ContactDTO {

@@ -26,7 +26,7 @@ docker compose up
 ```
 ## Usage
 
-You can add a contact like this. In the requirement didn't mention to update or duplicate check, so it is not support in this application.
+You can add a contact using put command as it told in problem. In the requirement didn't mention to update or duplicate check and in api definition in the document i have Id was not exist, so it is not support in this application.
 ```http request
 PUT http://localhost:8090/contact
 Content-Type: application/json
@@ -48,4 +48,5 @@ Content-Type: application/json
 "name": "saman"
 }
 ```
-You can use [contact.http](src/main/resources/contact.http to api call if you using intellij idea.
+You can use [contact.http](src/main/resources/contact.http) to api call if you using intellij idea.
+swagger ui didn't support this version of spring boot.
