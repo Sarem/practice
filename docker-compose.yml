@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  snapp:
+    build: .
+    network_mode: host
+    ports:
+      - 8090:8090
+    expose:
+      - "8090"
+    volumes:
+      - "~/.m2/repository/:/root/.m2/repository/"
+    depends_on:
+      - db
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: snapp
+    network_mode: host
+    ports:
+      - 3306:3306
+    expose:
+      - "3306"
+  adminer:
+    image: adminer
+    restart: always
+    network_mode: host
+    ports:
+      - 8080:8080
+    expose:
+      - "8080"
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.177.57.0/24
+
