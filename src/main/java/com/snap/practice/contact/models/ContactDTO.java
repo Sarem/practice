@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class ContactDTO {
 
+    private Long id;
     @NotNull
     @NotEmpty
     private String name;
@@ -28,6 +29,14 @@ public class ContactDTO {
         this.email = email;
         this.organization = organization;
         this.github = github;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

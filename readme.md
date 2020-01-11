@@ -25,8 +25,8 @@ docker compose up
 ```
 ## Usage
 
-You can add a contact using put command as it told in problem. In the requirement didn't mention to update or duplicate check and in api definition in the document that i got was not exist, so it is not support in this application.
-###constraints
+You can add a contact using put command as it told in problem. 
+##constraints
 name should not be empty.
 phone number and email should be valid.
 ```http request
@@ -41,7 +41,21 @@ Content-Type: application/json
   "github": "https://github.com/cloudfoundry"
 }
 ```
-You can search for a contact like this. It is case sensitive and use full text. You cannot search on git repository as it told in second paragraph.
+for update send id in path
+```http request
+PUT http://localhost:8090/contact/1
+Content-Type: application/json
+
+{
+  "name": "saman sarem",
+  "phoneNumber": "+909352490969",
+  "email": "saman.sarem@hotmail.com",
+  "organization": "snap",
+  "github": "https://github.com/cloudfoundry"
+}
+
+```
+You can search for a contact like this. It is case sensitive and use equal value. You cannot search on git repository as it told in second paragraph.
 ###info
 null values can use for get all contact
 ```http request
@@ -52,5 +66,18 @@ Content-Type: application/json
 "name": "saman"
 }
 ```
+To get all contacts
+```http request
+GET http://localhost:8090/contact
+Content-Type: application/json
+
+{}
+```
+To remove send
+```http request
+DELETE http://localhost:8090/contact/1
+Content-Type: application/json
+```
+
 You can use [contact.http](src/main/resources/contact.http) to api call if you using intellij idea.
 swagger ui didn't support this version of spring boot.

@@ -1,3 +1,6 @@
+###
+###add
+###
 PUT http://localhost:8090/contact
 Content-Type: application/json
 
@@ -10,10 +13,40 @@ Content-Type: application/json
 }
 
 ###
+###update
+###
+PUT http://localhost:8090/contact/1
+Content-Type: application/json
+
+{
+  "name": "saman sarem",
+  "phoneNumber": "+909352490969",
+  "email": "saman.sarem@hotmail.com",
+  "organization": "snap",
+  "github": "https://github.com/cloudfoundry"
+}
+
+###
+###search
+###
 GET http://localhost:8090/contact
 Content-Type: application/json
 
 {
-"name": "saman"
+  "phoneNumber": "+909352490969"
 }
+
+###
+###getAll
+###
+GET http://localhost:8090/contact
+Content-Type: application/json
+
+{}
+###
+###remove
+###
+DELETE http://localhost:8090/contact/1
+Content-Type: application/json
+
 ###
