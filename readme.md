@@ -26,7 +26,10 @@ docker compose up
 ```
 ## Usage
 
-You can add a contact using put command as it told in problem. In the requirement didn't mention to update or duplicate check and in api definition in the document i have Id was not exist, so it is not support in this application.
+You can add a contact using put command as it told in problem. In the requirement didn't mention to update or duplicate check and in api definition in the document that i got was not exist, so it is not support in this application.
+###constraints
+name should not be empty.
+phone number and email should be valid.
 ```http request
 PUT http://localhost:8090/contact
 Content-Type: application/json
@@ -40,6 +43,8 @@ Content-Type: application/json
 }
 ```
 You can search for a contact like this. It is case sensitive and use full text. You cannot search on git repository as it told in second paragraph.
+###info
+null values can use for get all contact
 ```http request
 GET http://localhost:8090/contact
 Content-Type: application/json
