@@ -3,6 +3,10 @@ package com.snap.practice.contact.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Entity
@@ -11,8 +15,12 @@ public class ContactEntity {
   @Id
   @GeneratedValue
   private Long id;
+  @NotNull
+  @NotEmpty
   private String name;
+  @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
   private String phoneNumber;
+  @Email
   private String email;
   private String organization;
   private String github;
