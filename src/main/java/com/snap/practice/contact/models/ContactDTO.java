@@ -1,13 +1,10 @@
 package com.snap.practice.contact.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Objects;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 public class ContactDTO {
 
@@ -24,8 +21,8 @@ public class ContactDTO {
     public ContactDTO() {
     }
 
-    @JsonCreator
-    public ContactDTO(@JsonProperty("name")String name, String phoneNumber, String email, String organization, String github) {
+
+    public ContactDTO(String name, String phoneNumber, String email, String organization, String github) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
