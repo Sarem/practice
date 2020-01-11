@@ -6,6 +6,7 @@ import com.snap.practice.contact.models.ContactSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,14 +22,17 @@ public class ContactService {
         this.contactMapper = contactMapper;
     }
 
+    @Transactional(readOnly = true)
     public List<ContactDTO> searchContact(ContactSearchDTO contactSearchDTO){
         return contactMapper.toDTO(contactRepository.findAll(Example.of(contactMapper.toEntity(contactSearchDTO))));
     }
 
+    @Transactional
     public void createContact(ContactDTO contactDTO){
         contactRepository.save(contactMapper.toEntity(contactDTO));
     }
 
+    @Transactional
     public void updateContact(ContactDTO contactDTO,Long id){
         if(!contactRepository.existsById(id)){
             throw new ContactNotFoundException(id);
@@ -38,6 +42,7 @@ public class ContactService {
         contactRepository.save(contactEntity);
     }
 
+    @Transactional
     public void removeContact(Long id){
         if(!contactRepository.existsById(id)){
             throw new ContactNotFoundException(id);
