@@ -12,14 +12,6 @@ services:
       - 3306:3306
     expose:
       - "3306"
-  adminer:
-    image: adminer
-    restart: always
-    network_mode: host
-    ports:
-      - 8080:8080
-    expose:
-      - "8080"
   snapp:
     build: .
     network_mode: host

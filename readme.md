@@ -10,7 +10,6 @@ Having [Docker](https://docs.docker.com/install/) make your environment ready.
 
 ## Pre-deploy
 This program is using 8090 port, for spring server.
-This program is using 8080 port, for db admin if you need.
 This program is using 3306 port, for mysql.
 please make sure these port are free in your system or change it in the [application.yaml](src/main/resources/application.yaml) and [docker-compose.yml](docker-compose.yml) file.
 
