@@ -27,6 +27,11 @@ public class ContactService {
         return contactMapper.toDTO(contactRepository.findAll(Example.of(contactMapper.toEntity(contactSearchDTO))));
     }
 
+    @Transactional(readOnly = true)
+    public ContactDTO getById(Long id){
+        return contactMapper.toDTO(contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id)));
+    }
+
     @Transactional
     public void createContact(ContactDTO contactDTO){
         contactRepository.save(contactMapper.toEntity(contactDTO));

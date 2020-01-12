@@ -67,4 +67,18 @@ public class ContractServiceTest {
         Assertions.assertTrue(result.contains(samanContactDTO));
         Assertions.assertTrue(result.contains(armanContactDTO));
     }
+
+
+    @Test
+    public void addAndDeleteTest() {
+        contactService.createContact(new ContactDTO("Rman", "+989359994444", "test@tst.com", "somewhere", null));
+        ContactSearchDTO searchDTO = new ContactSearchDTO();
+        searchDTO.setName("Rman");
+        contactService.searchContact(searchDTO)
+                .stream().
+                findFirst().ifPresent(contactDTO -> {
+            contactService.removeContact(contactDTO.getId());
+            Assertions.assertThrows(ContactNotFoundException.class,() ->contactService.getById(contactDTO.getId()));
+        });
+    }
 }

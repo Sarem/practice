@@ -31,6 +31,11 @@ public class ContactController {
     return contactService.searchContact(contactSearchDTO);
   }
 
+  @GetMapping("/{id}")
+  public ContactDTO getContact(@NotNull @PathVariable("id") Long id) {
+    return contactService.getById(id);
+  }
+
   @PutMapping
   public void addNewContact(@Valid @RequestBody ContactDTO contactDTO) {
     contactService.createContact(contactDTO);
