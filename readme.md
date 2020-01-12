@@ -73,7 +73,13 @@ Content-Type: application/json
 
 {}
 ```
+To get contact by id
+```http request
+GET http://localhost:8090/contact/1
+Content-Type: application/json
+```
 To remove send
+
 ```http request
 DELETE http://localhost:8090/contact/1
 Content-Type: application/json

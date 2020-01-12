@@ -43,6 +43,13 @@ GET http://localhost:8090/contact
 Content-Type: application/json
 
 {}
+
+###
+###getById
+###
+GET http://localhost:8090/contact/1
+Content-Type: application/json
+
 ###
 ###remove
 ###
