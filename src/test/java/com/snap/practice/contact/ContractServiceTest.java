@@ -28,7 +28,7 @@ public class ContractServiceTest {
 
     @Before
     public void init() {
-        samanContactDTO = new ContactDTO("Saman", "+989352490969", "saman.sarem@hotmail.com", "snap", "https://github.com/cloudfoundry");
+        samanContactDTO = new ContactDTO("Saman", "+989352490969", "saman.sarem@hotmail.com", "snap", "Sarem");
         armanContactDTO = new ContactDTO("Arman", null, "arman.ajabkhani@gmail.com", "snap", null);
         contactService.createContact(samanContactDTO);
         contactService.createContact(armanContactDTO);
