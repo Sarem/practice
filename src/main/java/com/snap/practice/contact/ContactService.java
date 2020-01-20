@@ -44,31 +44,22 @@ public class ContactService {
 
   @Transactional
   public void createContact(ContactDTO contactDTO) {
-    if (contactDTO.getGithub() == null || contactDTO.getGithub().isEmpty()) {
+    if (isWithoutGitHub(contactDTO)) {
       contactRepository.save(contactMapper.toEntity(contactDTO));
     } else {
-      final ContactEntity contactEntity = contactMapper.toEntity(
-          contactDTO, repositoryMapper.toEntity(
-              githubComponent.getUserRepositories(contactDTO.getGithub())));
-      contactEntity.getGithubRepositories().stream().forEach(repositoryEntity -> repositoryEntity.setContact(contactEntity));
+      final ContactEntity contactEntity = createContactEntityWithGitRepos(contactDTO);
       contactRepository.save(contactEntity);
     }
   }
 
   @Transactional
   public void updateContact(ContactDTO contactDTO, Long id) {
-    if (!contactRepository.existsById(id)) {
-      throw new ContactNotFoundException(id);
-    }
+    validateIdExist(id);
     ContactEntity contactEntity;
-    if (contactDTO.getGithub() == null || contactDTO.getGithub().isEmpty())
+    if (isWithoutGitHub(contactDTO))
       contactEntity = contactMapper.toEntity(contactDTO);
     else {
-      contactEntity = contactMapper.toEntity(
-          contactDTO, repositoryMapper.toEntity(
-              githubComponent.getUserRepositories(contactDTO.getGithub())));
-      contactEntity.getGithubRepositories().stream()
-          .forEach(repositoryEntity -> repositoryEntity.setContact(contactEntity));
+      contactEntity = createContactEntityWithGitRepos(contactDTO);
     }
     contactEntity.setId(id);
     contactRepository.save(contactEntity);
@@ -76,10 +67,26 @@ public class ContactService {
 
   @Transactional
   public void removeContact(Long id) {
+    validateIdExist(id);
+    contactRepository.deleteById(id);
+  }
+
+  private ContactEntity createContactEntityWithGitRepos(ContactDTO contactDTO) {
+    ContactEntity contactEntity= contactMapper.toEntity(
+            contactDTO, repositoryMapper.toEntity(
+                    githubComponent.getUserRepositories(contactDTO.getGithub())));
+    contactEntity.getGithubRepositories().stream().forEach(repositoryEntity -> repositoryEntity.setContact(contactEntity));
+    return contactEntity;
+  }
+
+  private boolean isWithoutGitHub(ContactDTO contactDTO) {
+    return contactDTO.getGithub() == null || contactDTO.getGithub().isEmpty();
+  }
+
+  private void validateIdExist(Long id) {
     if (!contactRepository.existsById(id)) {
       throw new ContactNotFoundException(id);
     }
-    contactRepository.deleteById(id);
   }
 
 }
