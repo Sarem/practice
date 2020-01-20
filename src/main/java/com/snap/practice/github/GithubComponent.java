@@ -1,6 +1,7 @@
 package com.snap.practice.github;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
+import com.snap.practice.github.model.RepositoryModel;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ import java.util.*;
 //@Slf4j
 @Component
 public class GithubComponent {
+
+     private static final org.slf4j.Logger log =
+            org.slf4j.LoggerFactory.getLogger(GithubComponent.class);
 
     private static final String GITHUB_API_URL = "https://api.github.com";
 
@@ -37,8 +41,7 @@ public class GithubComponent {
             repositories.addAll(response.getBody()) ;
 
         }catch (Exception e){
-//            TODO log.error(e.getMessage());
-            e.printStackTrace();
+            log.error("getUserRepositories",e);
         }
         return repositories;
     }

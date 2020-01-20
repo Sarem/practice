@@ -1,4 +1,4 @@
-package com.snap.practice.github;
+package com.snap.practice.github.model;
 
 import java.util.Objects;
 

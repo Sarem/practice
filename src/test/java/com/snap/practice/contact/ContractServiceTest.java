@@ -4,7 +4,7 @@ import com.snap.practice.contact.models.ContactDTO;
 import com.snap.practice.contact.models.ContactResponseDTO;
 import com.snap.practice.contact.models.ContactSearchDTO;
 import com.snap.practice.github.GithubComponent;
-import com.snap.practice.github.RepositoryModel;
+import com.snap.practice.github.model.RepositoryModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

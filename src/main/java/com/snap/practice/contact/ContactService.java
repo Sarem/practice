@@ -4,7 +4,6 @@ import com.snap.practice.contact.models.*;
 import com.snap.practice.contact.repository.ContactRepository;
 import com.snap.practice.github.GithubComponent;
 import com.snap.practice.github.RepositoryMapper;
-import com.snap.practice.github.RepositoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -65,7 +64,6 @@ public class ContactService {
     if (contactDTO.getGithub() == null || contactDTO.getGithub().isEmpty())
       contactEntity = contactMapper.toEntity(contactDTO);
     else {
-      //TODO write duplicate test
       contactEntity = contactMapper.toEntity(
           contactDTO, repositoryMapper.toEntity(
               githubComponent.getUserRepositories(contactDTO.getGithub())));
