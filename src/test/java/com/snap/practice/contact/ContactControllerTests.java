@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,7 +22,8 @@ public class ContactControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-
+    @MockBean
+    ContactService contactService;
 
     @Test
     public void shouldAcceptValidData() throws Exception {
@@ -33,7 +35,7 @@ public class ContactControllerTests {
                         "  \"phoneNumber\": \"+909352490969\",\n" +
                         "  \"email\": \"saman.sarem@hotmail.com\",\n" +
                         "  \"organization\": \"snap\",\n" +
-                        "  \"github\": \"https://github.com/cloudfoundry\"\n" +
+                        "  \"github\": \"Sarem\"\n" +
                         "}"))
                 .andExpect(status().isOk());
     }
@@ -61,7 +63,7 @@ public class ContactControllerTests {
                         "  \"phoneNumber\": \"+909352490969\",\n" +
                         "  \"email\": \"saman.sarem@hotmail.com\",\n" +
                         "  \"organization\": \"snap\",\n" +
-                        "  \"github\": \"https://github.com/cloudfoundry\"\n" +
+                        "  \"github\": \"Sarem\"\n" +
                         "}"))
                 .andExpect(status().isBadRequest());
     }
@@ -75,7 +77,7 @@ public class ContactControllerTests {
                         "  \"phoneNumber\": \"+909352490969\",\n" +
                         "  \"email\": \"saman.sarem@hotmail.com\",\n" +
                         "  \"organization\": \"snap\",\n" +
-                        "  \"github\": \"https://github.com/cloudfoundry\"\n" +
+                        "  \"github\": \"Sarem\"\n" +
                         "}"))
                 .andExpect(status().isBadRequest());
     }
@@ -90,7 +92,7 @@ public class ContactControllerTests {
                         "  \"phoneNumber\": \"909352490969+\",\n" +
                         "  \"email\": \"saman.sarem@hotmail.com\",\n" +
                         "  \"organization\": \"snap\",\n" +
-                        "  \"github\": \"https://github.com/cloudfoundry\"\n" +
+                        "  \"github\": \"Sarem\"\n" +
                         "}"))
                 .andExpect(status().isBadRequest());
     }
@@ -104,7 +106,7 @@ public class ContactControllerTests {
                         "  \"phoneNumber\": \"+909352490969\",\n" +
                         "  \"email\": \"saman.saremhotmail.com\",\n" +
                         "  \"organization\": \"snap\",\n" +
-                        "  \"github\": \"https://github.com/cloudfoundry\"\n" +
+                        "  \"github\": \"Sarem\"\n" +
                         "}"))
                 .andExpect(status().isBadRequest());
     }

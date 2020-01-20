@@ -1,13 +1,14 @@
 package com.snap.practice.contact.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class ContactEntity {
@@ -24,6 +25,10 @@ public class ContactEntity {
   private String email;
   private String organization;
   private String github;
+
+
+  @OneToMany(mappedBy="contact",cascade = CascadeType.ALL)
+  private Set<RepositoryEntity> githubRepositories;
 
   public Long getId() {
     return id;
@@ -73,33 +78,43 @@ public class ContactEntity {
     this.github = github;
   }
 
+  public Set<RepositoryEntity> getGithubRepositories() {
+    return githubRepositories;
+  }
+
+  public void setGithubRepositories(Set<RepositoryEntity> githubRepositories) {
+    this.githubRepositories = githubRepositories;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof ContactEntity)) return false;
     ContactEntity that = (ContactEntity) o;
     return Objects.equals(id, that.id) &&
-        Objects.equals(name, that.name) &&
-        Objects.equals(phoneNumber, that.phoneNumber) &&
-        Objects.equals(email, that.email) &&
-        Objects.equals(organization, that.organization) &&
-        Objects.equals(github, that.github);
+            Objects.equals(name, that.name) &&
+            Objects.equals(phoneNumber, that.phoneNumber) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(organization, that.organization) &&
+            Objects.equals(github, that.github) &&
+            Objects.equals(githubRepositories, that.githubRepositories);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, phoneNumber, email, organization, github);
+    return Objects.hash(id, name, phoneNumber, email, organization, github, githubRepositories);
   }
 
   @Override
   public String toString() {
     return "ContactEntity{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", phoneNumber='" + phoneNumber + '\'' +
-        ", email='" + email + '\'' +
-        ", organization='" + organization + '\'' +
-        ", github='" + github + '\'' +
-        '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", email='" + email + '\'' +
+            ", organization='" + organization + '\'' +
+            ", github='" + github + '\'' +
+            ", githubRepositories=" + githubRepositories +
+            '}';
   }
 }

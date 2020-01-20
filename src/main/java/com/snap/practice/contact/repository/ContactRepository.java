@@ -1,4 +1,4 @@
-package com.snap.practice.contact;
+package com.snap.practice.contact.repository;
 
 import com.snap.practice.contact.models.ContactEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
