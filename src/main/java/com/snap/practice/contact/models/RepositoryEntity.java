@@ -87,27 +87,21 @@ public class RepositoryEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof RepositoryEntity)) return false;
     RepositoryEntity that = (RepositoryEntity) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(contact, that.contact) &&
-        Objects.equals(githubId, that.githubId) &&
-        Objects.equals(node_id, that.node_id) &&
-        Objects.equals(name, that.name) &&
-        Objects.equals(full_name, that.full_name) &&
-        Objects.equals(description, that.description);
+    return Objects.equals(githubId, that.githubId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, contact, githubId, node_id, name, full_name, description);
+    return Objects.hash(githubId);
   }
 
   @Override
   public String toString() {
     return "RepositoryEntity{" +
         "id=" + id +
-        ", contact=" + contact +
+        ", contact=" + contact.getName() +
         ", githubId=" + githubId +
         ", node_id='" + node_id + '\'' +
         ", name='" + name + '\'' +

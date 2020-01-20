@@ -1,10 +1,12 @@
 package com.snap.practice.github;
 
+import com.snap.practice.contact.models.RepositoryDTO;
 import com.snap.practice.contact.models.RepositoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface RepositoryMapper {
@@ -13,7 +15,13 @@ public interface RepositoryMapper {
     @Mapping(target = "id", ignore = true)
     RepositoryEntity toEntity(RepositoryModel repositoryModel);
 
+    Set<RepositoryEntity> toEntity(Set<RepositoryModel> repositoryModels);
 
-    List<RepositoryEntity> toEntity(List<RepositoryModel> repositoryModels);
+
+    RepositoryDTO toDTO(RepositoryEntity repositoryEntity);
+
+    Set<RepositoryDTO> toDTO(Set<RepositoryEntity> repositoryEntities);
+
+
 
 }

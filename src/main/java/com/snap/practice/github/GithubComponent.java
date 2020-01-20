@@ -7,9 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 //@Slf4j
@@ -26,15 +24,15 @@ public class GithubComponent {
         this.restTemplate = restTemplate;
     }
 
-    public List<RepositoryModel> getUserRepositories(final String username) {
+    public Set<RepositoryModel> getUserRepositories(final String username) {
         Objects.requireNonNull(username);
-        List<RepositoryModel> repositories=new ArrayList<>();
+        Set<RepositoryModel> repositories=new HashSet<>();
         try {
-            final ResponseEntity<List<RepositoryModel>> response = restTemplate.exchange(
+            final ResponseEntity<Set<RepositoryModel>> response = restTemplate.exchange(
                     GET_USER_REPOSITORIES,
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<List<RepositoryModel>>(){},
+                    new ParameterizedTypeReference<Set<RepositoryModel>>(){},
                     username);
             repositories.addAll(response.getBody()) ;
 

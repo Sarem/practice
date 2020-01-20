@@ -1,6 +1,7 @@
 package com.snap.practice.contact;
 
 import com.snap.practice.contact.models.ContactDTO;
+import com.snap.practice.contact.models.ContactResponseDTO;
 import com.snap.practice.contact.models.ContactSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,12 +28,12 @@ public class ContactController {
   }
 
   @GetMapping
-  public List<ContactDTO> searchContact(@RequestBody ContactSearchDTO contactSearchDTO) {
+  public List<ContactResponseDTO> searchContact(@RequestBody ContactSearchDTO contactSearchDTO) {
     return contactService.searchContact(contactSearchDTO);
   }
 
   @GetMapping("/{id}")
-  public ContactDTO getContact(@NotNull @PathVariable("id") Long id) {
+  public ContactResponseDTO getContact(@NotNull @PathVariable("id") Long id) {
     return contactService.getById(id);
   }
 

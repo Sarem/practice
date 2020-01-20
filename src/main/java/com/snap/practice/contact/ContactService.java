@@ -1,9 +1,6 @@
 package com.snap.practice.contact;
 
-import com.snap.practice.contact.models.ContactDTO;
-import com.snap.practice.contact.models.ContactEntity;
-import com.snap.practice.contact.models.ContactSearchDTO;
-import com.snap.practice.contact.models.RepositoryEntity;
+import com.snap.practice.contact.models.*;
 import com.snap.practice.contact.repository.ContactRepository;
 import com.snap.practice.github.GithubComponent;
 import com.snap.practice.github.RepositoryMapper;
@@ -37,12 +34,12 @@ public class ContactService {
   }
 
   @Transactional(readOnly = true)
-  public List<ContactDTO> searchContact(ContactSearchDTO contactSearchDTO) {
+  public List<ContactResponseDTO> searchContact(ContactSearchDTO contactSearchDTO) {
     return contactMapper.toDTO(contactRepository.findAll(Example.of(contactMapper.toEntity(contactSearchDTO))));
   }
 
   @Transactional(readOnly = true)
-  public ContactDTO getById(Long id) {
+  public ContactResponseDTO getById(Long id) {
     return contactMapper.toDTO(contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id)));
   }
 
@@ -68,6 +65,7 @@ public class ContactService {
     if (contactDTO.getGithub() == null || contactDTO.getGithub().isEmpty())
       contactEntity = contactMapper.toEntity(contactDTO);
     else {
+      //TODO write duplicate test
       contactEntity = contactMapper.toEntity(
           contactDTO, repositoryMapper.toEntity(
               githubComponent.getUserRepositories(contactDTO.getGithub())));

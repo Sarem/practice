@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class ContactEntity {
@@ -27,7 +28,7 @@ public class ContactEntity {
 
 
   @OneToMany(mappedBy="contact",cascade = CascadeType.ALL)
-  private List<RepositoryEntity> githubRepositories;
+  private Set<RepositoryEntity> githubRepositories;
 
   public Long getId() {
     return id;
@@ -77,11 +78,11 @@ public class ContactEntity {
     this.github = github;
   }
 
-  public List<RepositoryEntity> getGithubRepositories() {
+  public Set<RepositoryEntity> getGithubRepositories() {
     return githubRepositories;
   }
 
-  public void setGithubRepositories(List<RepositoryEntity> githubRepositories) {
+  public void setGithubRepositories(Set<RepositoryEntity> githubRepositories) {
     this.githubRepositories = githubRepositories;
   }
 
@@ -104,5 +105,16 @@ public class ContactEntity {
     return Objects.hash(id, name, phoneNumber, email, organization, github, githubRepositories);
   }
 
-
+  @Override
+  public String toString() {
+    return "ContactEntity{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", email='" + email + '\'' +
+            ", organization='" + organization + '\'' +
+            ", github='" + github + '\'' +
+            ", githubRepositories=" + githubRepositories +
+            '}';
+  }
 }
