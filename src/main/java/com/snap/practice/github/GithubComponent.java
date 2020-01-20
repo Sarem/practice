@@ -1,5 +1,6 @@
 package com.snap.practice.github;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+//@Slf4j
 @Component
 public class GithubComponent {
 
@@ -36,7 +39,8 @@ public class GithubComponent {
             repositories.addAll(response.getBody()) ;
 
         }catch (Exception e){
-            //TODO logger
+//            TODO log.error(e.getMessage());
+            e.printStackTrace();
         }
         return repositories;
     }

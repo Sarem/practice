@@ -22,12 +22,7 @@ public class GithubComponentTest {
             githubComponent.getUserRepositories("Sarem").stream().forEach(repository -> System.out.println(repository));
         });
     }
-@Test
-    public void getBurrsutterRepositoriesTest(){
-    Assertions.assertDoesNotThrow(() -> {
-        githubComponent.getUserRepositories("burrsutter").stream().forEach(repository -> System.out.println(repository));
-    });
-    }
+
 
     @Test
     public void getNotExistRepositoriesTest(){

@@ -15,6 +15,7 @@ public class RepositoryEntity {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name="contact_id", nullable=true)
   private ContactEntity contact;
 
   private Long githubId;
@@ -86,15 +87,15 @@ public class RepositoryEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof RepositoryEntity)) return false;
+    if (o == null || getClass() != o.getClass()) return false;
     RepositoryEntity that = (RepositoryEntity) o;
     return Objects.equals(id, that.id) &&
-            Objects.equals(contact, that.contact) &&
-            Objects.equals(githubId, that.githubId) &&
-            Objects.equals(node_id, that.node_id) &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(full_name, that.full_name) &&
-            Objects.equals(description, that.description);
+        Objects.equals(contact, that.contact) &&
+        Objects.equals(githubId, that.githubId) &&
+        Objects.equals(node_id, that.node_id) &&
+        Objects.equals(name, that.name) &&
+        Objects.equals(full_name, that.full_name) &&
+        Objects.equals(description, that.description);
   }
 
   @Override
@@ -105,13 +106,13 @@ public class RepositoryEntity {
   @Override
   public String toString() {
     return "RepositoryEntity{" +
-            "id=" + id +
-            ", contact=" + contact +
-            ", githubId=" + githubId +
-            ", node_id='" + node_id + '\'' +
-            ", name='" + name + '\'' +
-            ", full_name='" + full_name + '\'' +
-            ", description='" + description + '\'' +
-            '}';
+        "id=" + id +
+        ", contact=" + contact +
+        ", githubId=" + githubId +
+        ", node_id='" + node_id + '\'' +
+        ", name='" + name + '\'' +
+        ", full_name='" + full_name + '\'' +
+        ", description='" + description + '\'' +
+        '}';
   }
 }

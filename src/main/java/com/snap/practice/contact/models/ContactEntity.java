@@ -25,8 +25,8 @@ public class ContactEntity {
   private String organization;
   private String github;
 
-  @OneToMany(mappedBy="contact",cascade = CascadeType.ALL,
-          orphanRemoval = true)
+
+  @OneToMany(mappedBy="contact",cascade = CascadeType.ALL)
   private List<RepositoryEntity> githubRepositories;
 
   public Long getId() {

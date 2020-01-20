@@ -2,14 +2,19 @@ package com.snap.practice.contact;
 
 import com.snap.practice.contact.models.ContactDTO;
 import com.snap.practice.contact.models.ContactSearchDTO;
+import com.snap.practice.github.GithubComponent;
+import com.snap.practice.github.RepositoryModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -22,16 +27,31 @@ public class ContractServiceTest {
     @Autowired
     private ContactMapper contactMapper;
 
+    @MockBean
+    private GithubComponent githubComponent;
+
     private ContactDTO samanContactDTO;
     private ContactDTO armanContactDTO;
 
 
     @Before
     public void init() {
+
+        Mockito.when(githubComponent.getUserRepositories("Sarem")).thenReturn(getSamanRepositories());
         samanContactDTO = new ContactDTO("Saman", "+989352490969", "saman.sarem@hotmail.com", "snap", "Sarem");
         armanContactDTO = new ContactDTO("Arman", null, "arman.ajabkhani@gmail.com", "snap", null);
         contactService.createContact(samanContactDTO);
         contactService.createContact(armanContactDTO);
+    }
+
+    private List<RepositoryModel> getSamanRepositories(){
+        RepositoryModel repositoryModel=new RepositoryModel();
+        repositoryModel.setId(12343L);
+        repositoryModel.setDescription("sad");
+        repositoryModel.setFull_name("dsadsad");
+        repositoryModel.setName("dsads");
+        repositoryModel.setNode_id("dsadd");
+        return Arrays.asList(repositoryModel);
     }
 
     @Test
