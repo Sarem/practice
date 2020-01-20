@@ -27,4 +27,6 @@ public interface ContactMapper {
 
     List<ContactResponseDTO> toDTO(List<ContactEntity> contactEntities);
 
+    ContactDTO toDTO(ContactResponseDTO contactResponseDTO);
+
 }

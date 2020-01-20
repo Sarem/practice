@@ -62,9 +62,8 @@ public class ContractServiceTest {
         ContactSearchDTO samanSearchDTO = new ContactSearchDTO();
         samanSearchDTO.setName(samanContactDTO.getName());
         List<ContactResponseDTO> result = contactService.searchContact(samanSearchDTO);
-        //TODO contain check
-//        Assertions.assertTrue(result.contains(samanContactDTO));
-//        Assertions.assertFalse(result.contains(armanContactDTO));
+        Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(samanContactDTO));
+        Assertions.assertFalse(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(armanContactDTO));
     }
 
     @Test
@@ -72,27 +71,38 @@ public class ContractServiceTest {
         ContactSearchDTO armanSearchDTO = new ContactSearchDTO();
         armanSearchDTO.setEmail(armanContactDTO.getEmail());
         List<ContactResponseDTO> result = contactService.searchContact(armanSearchDTO);
-        //TODO contain check
-//        Assertions.assertTrue(result.contains(armanContactDTO));
-//        Assertions.assertFalse(result.contains(samanContactDTO));
+        Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(armanContactDTO));
+        Assertions.assertFalse(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(samanContactDTO));
     }
 
     @Test
     public void searchForSamanContactByAllArguments() {
         ContactSearchDTO samanSearchDTO = contactMapper.toSearchDTO(samanContactDTO);
         List<ContactResponseDTO> result = contactService.searchContact(samanSearchDTO);
-        //TODO contain check
-//        Assertions.assertTrue(result.contains(samanContactDTO));
-//        Assertions.assertFalse(result.contains(armanContactDTO));
+        Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(samanContactDTO));
+        Assertions.assertFalse(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(armanContactDTO));
     }
 
     @Test
     public void searchAllContactByEmptyArguments() {
         ContactSearchDTO searchDTO = new ContactSearchDTO();
         List<ContactResponseDTO> result = contactService.searchContact(searchDTO);
-        //TODO contain check
-//        Assertions.assertTrue(result.contains(samanContactDTO));
-//        Assertions.assertTrue(result.contains(armanContactDTO));
+        Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(samanContactDTO));
+        Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(armanContactDTO));
+    }
+    @Test
+    public void contactWithRepositoryShouldHaveRepositoryInDb() {
+        ContactSearchDTO samanSearchDTO = new ContactSearchDTO();
+        samanSearchDTO.setName(samanContactDTO.getName());
+        List<ContactResponseDTO> result = contactService.searchContact(samanSearchDTO);
+        result.stream().findFirst().ifPresent(contactResponseDTO -> Assertions.assertFalse(contactResponseDTO.getRepositories().isEmpty()));
+    }
+    @Test
+    public void contactWithoutRepositoryShouldNotHaveRepositoryInDb() {
+        ContactSearchDTO armanSearchDTO = new ContactSearchDTO();
+        armanSearchDTO.setName(armanContactDTO.getName());
+        List<ContactResponseDTO> result = contactService.searchContact(armanSearchDTO);
+        result.stream().findFirst().ifPresent(contactResponseDTO -> Assertions.assertTrue(contactResponseDTO.getRepositories().isEmpty()));
     }
 
 
