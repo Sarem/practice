@@ -9,3 +9,8 @@ datasource:
   username: sa
   password: 1234
   driverClassName: org.h2.Driver
+properties:
+  foo: bar
+  github:
+    url: https://api.github.com
+    user-repository-uri: /users/{username}/repos

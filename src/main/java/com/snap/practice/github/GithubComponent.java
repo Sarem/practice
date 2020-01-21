@@ -2,6 +2,7 @@ package com.snap.practice.github;
 
 //import lombok.extern.slf4j.Slf4j;
 import com.snap.practice.github.model.RepositoryModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,11 @@ public class GithubComponent {
      private static final org.slf4j.Logger log =
             org.slf4j.LoggerFactory.getLogger(GithubComponent.class);
 
-    private static final String GITHUB_API_URL = "https://api.github.com";
+    @Value("${properties.github.url}")
+    private String GITHUB_API_URL;
 
-    private static final String GET_USER_REPOSITORIES = GITHUB_API_URL + "/users/{username}/repos";
+    @Value("${properties.github.user-repository-uri}")
+    private  String GET_USER_REPOSITORIES;
 
     private final RestTemplate restTemplate;
 
@@ -33,7 +36,7 @@ public class GithubComponent {
         Set<RepositoryModel> repositories=new HashSet<>();
         try {
             final ResponseEntity<Set<RepositoryModel>> response = restTemplate.exchange(
-                    GET_USER_REPOSITORIES,
+                    GITHUB_API_URL+GET_USER_REPOSITORIES,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<Set<RepositoryModel>>(){},

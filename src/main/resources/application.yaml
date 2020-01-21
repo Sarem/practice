@@ -12,5 +12,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-my-config:
-  git-url: https://api.github.com
+properties:
+  foo: bar
+  github:
+    url: https://api.github.com
+    user-repository-uri: /users/{username}/repos
