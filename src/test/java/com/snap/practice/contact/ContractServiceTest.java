@@ -47,8 +47,8 @@ public class ContractServiceTest {
         contactService.createContact(armanContactDTO);
     }
 
-    private Set<RepositoryModel> getSamanRepositories(){
-        RepositoryModel repositoryModel=new RepositoryModel();
+    private Set<RepositoryModel> getSamanRepositories() {
+        RepositoryModel repositoryModel = new RepositoryModel();
         repositoryModel.setId(12343L);
         repositoryModel.setDescription("sad");
         repositoryModel.setFull_name("dsadsad");
@@ -90,6 +90,7 @@ public class ContractServiceTest {
         Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(samanContactDTO));
         Assertions.assertTrue(result.stream().map(contactMapper::toDTO).collect(Collectors.toList()).contains(armanContactDTO));
     }
+
     @Test
     public void contactWithRepositoryShouldHaveRepositoryInDb() {
         ContactSearchDTO samanSearchDTO = new ContactSearchDTO();
@@ -97,6 +98,7 @@ public class ContractServiceTest {
         List<ContactResponseDTO> result = contactService.searchContact(samanSearchDTO);
         result.stream().findFirst().ifPresent(contactResponseDTO -> Assertions.assertFalse(contactResponseDTO.getRepositories().isEmpty()));
     }
+
     @Test
     public void contactWithoutRepositoryShouldNotHaveRepositoryInDb() {
         ContactSearchDTO armanSearchDTO = new ContactSearchDTO();
@@ -115,7 +117,7 @@ public class ContractServiceTest {
                 .stream().
                 findFirst().ifPresent(contactDTO -> {
             contactService.removeContact(contactDTO.getId());
-            Assertions.assertThrows(ContactNotFoundException.class,() ->contactService.getById(contactDTO.getId()));
+            Assertions.assertThrows(ContactNotFoundException.class, () -> contactService.getById(contactDTO.getId()));
         });
     }
 }

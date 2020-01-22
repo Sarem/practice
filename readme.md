@@ -24,8 +24,10 @@ then start containers
 docker compose up
 ```
 ## Usage
-
-You can add a contact using put command as it told in problem. 
+You can use [contact.http](src/main/resources/contact.http) to api call if you using intellij idea.
+or use [spring-doc-open-api-ui](http://localhost:8090/swagger-ui.html) to test APIs.
+you can reach api definitions using [json](http://localhost:8090/v3/api-docs/) or api-def [yaml](http://localhost:8090/v3/api-docs.yaml) 
+You can add a contact using put command as it told in requirements. 
 ##constraints
 name should not be empty.
 phone number and email should be valid.
@@ -70,8 +72,6 @@ To get all contacts
 ```http request
 GET http://localhost:8090/contact
 Content-Type: application/json
-
-{}
 ```
 To get contact by id
 ```http request
@@ -85,5 +85,5 @@ DELETE http://localhost:8090/contact/1
 Content-Type: application/json
 ```
 
-You can use [contact.http](src/main/resources/contact.http) to api call if you using intellij idea.
-swagger ui didn't support this version of spring boot.
+
+

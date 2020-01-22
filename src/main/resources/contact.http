@@ -42,8 +42,6 @@ Content-Type: application/json
 GET http://localhost:8090/contact
 Content-Type: application/json
 
-{}
-
 ###
 ###getById
 ###
