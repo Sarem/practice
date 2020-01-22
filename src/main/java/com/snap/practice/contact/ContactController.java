@@ -49,13 +49,13 @@ public class ContactController {
     }
 
     @Operation(summary = "Add a new contact", description = "", tags = {"contact"})
-    @PutMapping
+    @PutMapping(consumes = { "application/json", "application/xml" })
     public void addNewContact(@Valid @RequestBody ContactDTO contactDTO) {
         contactService.createContact(contactDTO);
     }
 
     @Operation(summary = "Update an existing contact", description = "", tags = {"contact"})
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}" , consumes = { "application/json", "application/xml" })
     public void update(@Valid @RequestBody ContactDTO contactDTO, @NotNull @PathVariable("id") Long id) {
         contactService.updateContact(contactDTO, id);
     }
