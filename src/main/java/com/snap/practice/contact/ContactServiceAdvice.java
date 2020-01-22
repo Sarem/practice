@@ -20,7 +20,7 @@ public class ContactServiceAdvice {
     }
 
     private ResponseEntity<String> error(HttpStatus status, Exception e) {
-        log.error("NOT_FOUND",e);
+        log.error("NOT_FOUND", e);
         return ResponseEntity.status(status).body(e.getMessage());
     }
 }

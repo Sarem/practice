@@ -11,7 +11,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring")
 public interface RepositoryMapper {
 
-    @Mapping(target = "githubId",source = "id")
+    @Mapping(target = "githubId", source = "id")
     @Mapping(target = "id", ignore = true)
     RepositoryEntity toEntity(RepositoryModel repositoryModel);
 
@@ -21,7 +21,6 @@ public interface RepositoryMapper {
     RepositoryDTO toDTO(RepositoryEntity repositoryEntity);
 
     Set<RepositoryDTO> toDTO(Set<RepositoryEntity> repositoryEntities);
-
 
 
 }
