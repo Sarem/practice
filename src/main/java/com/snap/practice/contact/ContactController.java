@@ -29,7 +29,7 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-    @Operation(summary = "Find All Contacts or search by example", description = "search for contact", tags = {"contactResponseDTO"})
+    @Operation(summary = "Find All Contacts or search by example", description = "search for contact", tags = {"contact"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ContactResponseDTO.class))))})
@@ -38,7 +38,7 @@ public class ContactController {
         return new ResponseEntity<>(contactService.searchContact(contactSearchDTO), HttpStatus.OK);
     }
 
-    @Operation(summary = "Find contact by ID", description = "Returns a single contact", tags = {"contactResponseDTO"})
+    @Operation(summary = "Find contact by ID", description = "Returns a single contact", tags = {"contact"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
                     content = @Content(schema = @Schema(implementation = ContactResponseDTO.class))),
