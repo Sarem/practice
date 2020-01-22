@@ -29,19 +29,19 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-    @Operation(summary = "Find All Contacts or search by example", description = "search for contact", tags = {"contactDTO"})
+    @Operation(summary = "Find All Contacts or search by example", description = "search for contact", tags = {"contactResponseDTO"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ContactDTO.class))))})
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ContactResponseDTO.class))))})
     @GetMapping
     public ResponseEntity<List<ContactResponseDTO>> searchContact(@RequestBody(required = false) ContactSearchDTO contactSearchDTO) {
         return new ResponseEntity<>(contactService.searchContact(contactSearchDTO), HttpStatus.OK);
     }
 
-    @Operation(summary = "Find contact by ID", description = "Returns a single contact", tags = {"contactDTO"})
+    @Operation(summary = "Find contact by ID", description = "Returns a single contact", tags = {"contactResponseDTO"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(schema = @Schema(implementation = ContactDTO.class))),
+                    content = @Content(schema = @Schema(implementation = ContactResponseDTO.class))),
             @ApiResponse(responseCode = "404", description = "Contact not found")})
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<ContactResponseDTO> getContact(@NotNull @PathVariable("id") Long id) {
