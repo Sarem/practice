@@ -33,7 +33,7 @@ public class ContactController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ContactResponseDTO.class))))})
-    @GetMapping
+    @GetMapping(consumes = { "application/json", "application/xml" })
     public ResponseEntity<List<ContactResponseDTO>> searchContact(@RequestBody(required = false) ContactSearchDTO contactSearchDTO) {
         return new ResponseEntity<>(contactService.searchContact(contactSearchDTO), HttpStatus.OK);
     }
