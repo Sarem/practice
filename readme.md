@@ -1,6 +1,8 @@
 # Snapp
 
 This is a contact app only for insert and search contact.
+this is a test application 
+it will add also add git hub repository of users in to database.
 
 ## Requirements
 

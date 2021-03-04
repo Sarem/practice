@@ -8,10 +8,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: snapp
       MYSQL_DATABASE: snapp
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
     ports:
       - 3306:3306
-    expose:
-      - "3306"
+#    expose:
+#      - "3306"
   snapp:
     build: .
     network_mode: host
@@ -23,8 +27,8 @@ services:
     volumes:
       - "~/.m2/repository/:/root/.m2/repository/"
     depends_on:
-      - db
-
+      db:
+        condition: service_healthy
 networks:
   default:
     driver: bridge
